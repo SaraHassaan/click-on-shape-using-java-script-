@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title>click on shape</title>
+	 <style type="text/css">
+	       body
+		   {
+		     
+                background-color: #cccccc;
+   
+           }
+	       #shape
+		   {
+		        background-color:red;
+				position:relative;
+				width:100px;
+				height:100px;
+				border-radius:50px;
+				margin: auto;
+				
+		   }
+		   p.p1
+		   {
+		       font-weight: bold; 
+		   }
+		   div.div1
+		   {
+		      
+			   text-align:center; 
+		   }
+	 </style>
+</head>
+<body>
+     <h1 align="center">Click on shape when you see it<h2>
+     <div class="div1" > 
+	      <p class="p1">your time is :<span id="time">0</span>s</p>
+	 </div>
+	 <div id="shape" ></div>
+<script>
+     var top,left;//global var
+	 var timeShape=Date.now(); //for store the time when the shape is appeared 
+	 var timeClick; //storing the time when you click on shape
+     var shape=document.getElementById("shape");
+     var time=document.getElementById("time");
+	 shape.onclick=function()
+	 {
+	     timeClick=Date.now();
+	     shape.style.display="none";
+		 time.innerHTML=(timeClick-timeShape)/1000;	
+         displayShape();
+         	 
+	 }
+     function displayShape()
+	 {
+	      shape.style.backgroundColor=randomColor();
+		  changeShape();
+		  changePosition();
+		  //shape.style.display="block";
+		  setTimeout(function(){shape.style.display="block";  //this for make the shape appear from 0 to 2 second randomly
+		  timeShape=Date.now();},Math.random()*2000)
+		  //timeShape=Date.now();
+	 }
+	 function randomColor()
+	 {
+	       var color='#';
+	       var letter='0123456789abcdef'.split('');//its like when write ..var letter=['1','2',......'f']
+		   //i want to choose 6 letters by random from 16 elements in the array letter and store them on variable called color 
+		   for(var i=0; i<6 ; i++)
+		   {
+		       color=color+letter[Math.round(Math.random()*16)];
+		   }
+		   return color;
+	 }
+	 function changePosition()
+	 {
+	       top=Math.random()*300;
+		   left=Math.random()*300; //how far from left?
+		   shape.style.top=top+"px";
+		   shape.style.left=left+"px"; 
+           //shape.style.bottom="150px";		   
+	 }
+	 function changeShape()
+	 {
+           if(Math.round(Math.random()))		   
+	       {
+		      shape.style.borderRadius="0px";
+
+		   }
+		   else
+		   {
+		      shape.style.borderRadius="50px";
+		   
+		   }
+	 }
+	
+</script>
+</body>
+</html>
